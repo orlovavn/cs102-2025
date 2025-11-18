@@ -6,7 +6,7 @@ def is_prime(n: int) -> bool:
     """Проверка простоты числа."""
     if n < 2:
         return False
-    for i in range(2, int(n ** 0.5) + 1):
+    for i in range(2, int(n**0.5) + 1):
         if n % i == 0:
             return False
     return True
@@ -58,7 +58,7 @@ def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
 
 def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
     key, n = pk
-    return "".join(chr((char ** key) % n) for char in ciphertext)
+    return "".join(chr((char**key) % n) for char in ciphertext)
 
 
 if __name__ == "__main__":
