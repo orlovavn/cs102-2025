@@ -1,5 +1,6 @@
 import pathlib
 import typing as tp
+import random 
 
 T = tp.TypeVar("T")
 
@@ -168,7 +169,30 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """ Если решение solution верно, то вернуть True, в противном случае False """
     # TODO: Add doctests with bad puzzles
-    pass
+    for row in solution:
+        if '.' in row:
+            return False
+    
+    for i in range(9):
+        row = get_row(solution, (i, 0))
+        if set(row) != {'1', '2', '3', '4', '5', '6', '7', '8', '9'}:
+            return False
+    
+    for j in range(9):
+        col = get_col(solution, (0, j))
+        if set(col) != {'1', '2', '3', '4', '5', '6', '7', '8', '9'}:
+            return False
+    
+    block_starts = [(0, 0), (0, 3), (0, 6),
+                    (3, 0), (3, 3), (3, 6),
+                    (6, 0), (6, 3), (6, 6)]
+    
+    for start in block_starts:
+        block = get_block(solution, start)
+        if set(block) != {'1', '2', '3', '4', '5', '6', '7', '8', '9'}:
+            return False
+    
+    return True
 
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
@@ -192,7 +216,34 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     >>> check_solution(solution)
     True
     """
-    pass
+    if N > 81:
+        N = 81
+    elif N < 0:
+        N = 0
+    
+    grid = [['.' for _ in range(9)] for _ in range(9)]
+    
+    for block in range(3):
+        numbers = list(range(1, 10))
+        random.shuffle(numbers)
+        
+        for i in range(3):
+            for j in range(3):
+                row = block * 3 + i
+                col = block * 3 + j
+                grid[row][col] = str(numbers[i * 3 + j])
+    
+    solve(grid)
+    
+    positions = [(i, j) for i in range(9) for j in range(9)]
+    random.shuffle(positions)
+    
+    cells_to_remove = 81 - N
+    for k in range(cells_to_remove):
+        row, col = positions[k]
+        grid[row][col] = '.'
+    
+    return grid
 
 
 if __name__ == "__main__":
