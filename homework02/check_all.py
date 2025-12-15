@@ -1,5 +1,7 @@
-import sudoku
 import time
+
+import sudoku
+
 
 def main():
     puzzles = ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]
