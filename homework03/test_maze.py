@@ -1,5 +1,6 @@
 # test_maze.py
 import unittest
+
 from maze import *
 
 
