@@ -2,8 +2,8 @@
 life_console.py - Консольный интерфейс для игры "Жизнь"
 """
 
-import sys
 import os
+import sys
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -15,8 +15,9 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Импортируем после добавления пути
 try:
-    from ui import UI
     import curses
+
+    from ui import UI
 except ImportError as e:
     print(f"Ошибка импорта: {e}")
     sys.exit(1)
@@ -135,7 +136,7 @@ class Console(UI):
 # Код для запуска, если файл выполняется напрямую
 if __name__ == "__main__":
     from life import GameOfLife
-    
+
     # Создаем игру для демонстрации
     life = GameOfLife((15, 30), randomize=True, max_generations=50)
     console = Console(life)

@@ -1,11 +1,12 @@
 """
 life_gui.py - Графический интерфейс для игры "Жизнь"
 """
+import os
+import sys
+from typing import TYPE_CHECKING
+
 import pygame
 from pygame.locals import *
-import sys
-import os
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from life import GameOfLife
