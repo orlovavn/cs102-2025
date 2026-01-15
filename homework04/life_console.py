@@ -27,16 +27,16 @@ class Console(UI):
     """
     Консольный интерфейс с использованием curses.
     """
-    
-    def __init__(self, life: 'GameOfLife') -> None:
+
+    def __init__(self, life: "GameOfLife") -> None:
         """
         Инициализация консольного интерфейса.
-        
+
         Args:
             life: Объект игры
         """
         super().__init__(life)
-    
+
     def draw_borders(self, screen) -> None:
         """
         Отображает рамку вокруг игрового поля.
@@ -44,28 +44,28 @@ class Console(UI):
         # Верхняя и нижняя границы
         for x in range(self.life.cols + 2):
             try:
-                screen.addch(0, x, '-')
-                screen.addch(self.life.rows + 1, x, '-')
+                screen.addch(0, x, "-")
+                screen.addch(self.life.rows + 1, x, "-")
             except curses.error:
                 pass
-        
+
         # Боковые границы
         for y in range(1, self.life.rows + 1):
             try:
-                screen.addch(y, 0, '|')
-                screen.addch(y, self.life.cols + 1, '|')
+                screen.addch(y, 0, "|")
+                screen.addch(y, self.life.cols + 1, "|")
             except curses.error:
                 pass
-        
+
         # Углы
         try:
-            screen.addch(0, 0, '+')
-            screen.addch(0, self.life.cols + 1, '+')
-            screen.addch(self.life.rows + 1, 0, '+')
-            screen.addch(self.life.rows + 1, self.life.cols + 1, '+')
+            screen.addch(0, 0, "+")
+            screen.addch(0, self.life.cols + 1, "+")
+            screen.addch(self.life.rows + 1, 0, "+")
+            screen.addch(self.life.rows + 1, self.life.cols + 1, "+")
         except curses.error:
             pass
-    
+
     def draw_grid(self, screen) -> None:
         """
         Отображает состояние клеток.
@@ -73,11 +73,11 @@ class Console(UI):
         for y in range(self.life.rows):
             for x in range(self.life.cols):
                 try:
-                    char = '█' if self.life.curr_generation[y][x] else ' '
+                    char = "█" if self.life.curr_generation[y][x] else " "
                     screen.addch(y + 1, x + 1, char)
                 except curses.error:
                     pass  # Игнорируем ошибки на границах
-    
+
     def run(self) -> None:
         """
         Запускает консольный интерфейс.
@@ -87,44 +87,44 @@ class Console(UI):
         curses.noecho()
         curses.cbreak()
         screen.keypad(True)
-        
+
         try:
             # Настраиваем цвета
             curses.start_color()
             curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
-            
+
             running = True
             while running:
                 # Очищаем экран
                 screen.clear()
-                
+
                 # Отображаем информацию
                 info = f"Game of Life | Generation: {self.life.generations}"
-                if self.life.max_generations != float('inf'):
+                if self.life.max_generations != float("inf"):
                     info += f" / {int(self.life.max_generations)}"
-                
+
                 info += " | Press 'q' to quit"
                 screen.addstr(0, 0, info)
-                
+
                 # Рисуем поле
                 self.draw_borders(screen)
                 self.draw_grid(screen)
-                
+
                 # Обновляем экран
                 screen.refresh()
-                
+
                 # Выполняем шаг игры
                 if not self.life.is_max_generations_exceeded and self.life.is_changing:
                     self.life.step()
-                
+
                 # Ожидаем ввод (100 мс)
                 screen.timeout(100)
                 key = screen.getch()
-                
+
                 # Выход по 'q'
-                if key == ord('q'):
+                if key == ord("q"):
                     running = False
-        
+
         finally:
             # Восстанавливаем терминал
             curses.nocbreak()
