@@ -2,7 +2,7 @@ import random
 from typing import List, Tuple
 
 import pygame
-from pygame.locals import *
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_SPACE, K_r, MOUSEBUTTONDOWN
 
 Cell = Tuple[int, int]
 Cells = List[Cell]

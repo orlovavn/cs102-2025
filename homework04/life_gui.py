@@ -3,7 +3,7 @@ import sys
 from typing import TYPE_CHECKING
 
 import pygame
-from pygame.locals import *
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_SPACE, K_r, MOUSEBUTTONDOWN
 
 if TYPE_CHECKING:
     from life import GameOfLife
