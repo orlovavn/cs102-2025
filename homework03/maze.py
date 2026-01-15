@@ -8,7 +8,7 @@ def create_grid(rows: int = 15, cols: int = 15) -> List[List[Union[str, int]]]:
 
 
 def bin_tree_maze(
-        rows: int = 15, cols: int = 15, random_exit: bool = True
+    rows: int = 15, cols: int = 15, random_exit: bool = True
 ) -> List[List[Union[str, int]]]:
     grid = create_grid(rows, cols)
 
@@ -61,8 +61,7 @@ def get_exits(grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
     return exits
 
 
-def encircled_exit(grid: List[List[Union[str, int]]],
-                   coord: Tuple[int, int]) -> bool:
+def encircled_exit(grid: List[List[Union[str, int]]], coord: Tuple[int, int]) -> bool:
     if grid is None:
         return True
 
@@ -143,7 +142,7 @@ def add_path_to_grid(grid, path):
     if grid is None or path is None:
         return grid
 
-    for (x, y) in path:
+    for x, y in path:
         if grid[x][y] != "X":
             grid[x][y] = "•"
 
