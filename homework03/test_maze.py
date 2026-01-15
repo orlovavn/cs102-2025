@@ -18,7 +18,7 @@ class TestMazeSolver(unittest.TestCase):
             ["■", " ", " ", " ", "■"],
             ["■", " ", "■", " ", "■"],
             ["■", " ", " ", " ", "■"],
-            ["X", "■", "■", "■", "X"]
+            ["X", "■", "■", "■", "X"],
         ]
         exits = get_exits(grid)
         self.assertEqual(len(exits), 2)

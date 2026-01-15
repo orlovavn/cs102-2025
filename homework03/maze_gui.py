@@ -11,6 +11,8 @@ def draw_cell(x, y, color, size: int = 10):
     x1 = x + size
     y1 = y + size
     canvas.create_rectangle(x, y, x1, y1, fill=color)
+
+
 def draw_maze(grid: List[List[str]], size: int = 10):
     for x, row in enumerate(grid):
         for y, cell in enumerate(row):
@@ -30,6 +32,8 @@ def show_solution():
         draw_maze(maze, CELL_SIZE)
     else:
         tk.messagebox.showinfo("Message", "No solutions")
+
+
 if __name__ == "__main__":
     global GRID, CELL_SIZE
     N, M = 51, 77
