@@ -37,6 +37,7 @@ def show_solution():
 if __name__ == "__main__":
     global GRID, CELL_SIZE
     N, M = 51, 77
+
     CELL_SIZE = 10
     GRID = bin_tree_maze(N, M)
 
@@ -46,6 +47,7 @@ if __name__ == "__main__":
 
     canvas = tk.Canvas(window, width=M * CELL_SIZE, height=N * CELL_SIZE)
     canvas.pack()
+
     draw_maze(GRID, CELL_SIZE)
     ttk.Button(window, text="Solve", command=show_solution).pack(pady=20)
 
